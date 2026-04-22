@@ -14,6 +14,7 @@ export function fd(p, r, y) {
   return p * Math.pow(1 + r / 100, y);
 }
 
-export function tax(income) {
+export function taxNew(income) {
+  if (income < 300000) return 0;
   return income * 0.1;
 }

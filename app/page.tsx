@@ -7,7 +7,7 @@ export default function Home() {
         <li><a href="/emi-calculator">EMI</a></li>
         <li><a href="/sip-calculator">SIP</a></li>
         <li><a href="/fd-calculator">FD</a></li>
-        <li><a href="/income-tax-calculator">Income Tax</a></li>
+        <li><a href="/income-tax-calculator">Tax</a></li>
       </ul>
     </div>
   );
