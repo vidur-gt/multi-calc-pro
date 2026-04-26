@@ -3,7 +3,6 @@
 import Link from "next/link";
 import {
   ArrowRight,
-  Calculator,
   CheckCircle2,
   Landmark,
   LineChart,
@@ -12,6 +11,7 @@ import {
   ReceiptText,
   ShieldCheck,
 } from "lucide-react";
+import ProductMark from "@/components/ProductMark";
 
 export default function Home() {
   const tools = [
@@ -77,20 +77,27 @@ export default function Home() {
               <h2 className="mt-1 text-xl font-bold text-slate-900">Plan before you commit</h2>
             </div>
             <div className="brand-mark">
-              <Calculator className="h-5 w-5" />
+              <ProductMark className="h-7 w-7" />
             </div>
           </div>
           <div className="mt-5 grid gap-3">
             {[
-              ["Tax comparison", "Old vs New regime"],
-              ["Loan estimate", "EMI and interest split"],
-              ["Investment growth", "SIP future value"],
-              ["Deposit maturity", "FD interest earned"],
-            ].map(([label, value]) => (
-              <div key={label} className="flex items-center justify-between rounded-lg border border-slate-200 bg-white p-4">
-                <span className="text-sm font-semibold text-slate-600">{label}</span>
-                <span className="text-sm font-bold text-slate-900">{value}</span>
-              </div>
+              ["Tax comparison", "Old vs New regime", "/income-tax-calculator"],
+              ["Loan estimate", "EMI and interest split", "/emi-calculator"],
+              ["Investment growth", "SIP future value", "/sip-calculator"],
+              ["Deposit maturity", "FD interest earned", "/fd-calculator"],
+            ].map(([label, value, href]) => (
+              <Link
+                key={label}
+                href={href}
+                className="group flex items-center justify-between gap-4 rounded-lg border border-slate-200 bg-white p-4 transition-all hover:border-slate-400 hover:shadow-sm"
+              >
+                <span>
+                  <span className="block text-sm font-semibold text-slate-600">{label}</span>
+                  <span className="mt-1 block text-sm font-bold text-slate-900">{value}</span>
+                </span>
+                <ArrowRight className="h-4 w-4 shrink-0 text-slate-400 transition-transform group-hover:translate-x-1 group-hover:text-slate-700" />
+              </Link>
             ))}
           </div>
         </div>

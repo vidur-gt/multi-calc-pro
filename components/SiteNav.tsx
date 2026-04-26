@@ -2,7 +2,8 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Calculator, Landmark, LineChart, PiggyBank, ReceiptText } from "lucide-react";
+import { Landmark, LineChart, PiggyBank, ReceiptText } from "lucide-react";
+import ProductMark from "@/components/ProductMark";
 
 const navItems = [
   { href: "/emi-calculator", label: "EMI", icon: Landmark },
@@ -19,7 +20,7 @@ export default function SiteNav() {
       <div className="site-shell nav-inner">
         <Link href="/" className="brand-lockup" aria-label="S-Money home">
           <span className="brand-mark">
-            <Calculator className="h-5 w-5" />
+            <ProductMark className="h-7 w-7" />
           </span>
           <span>
             <span className="block text-lg font-extrabold leading-tight tracking-normal text-slate-900">S-Money</span>

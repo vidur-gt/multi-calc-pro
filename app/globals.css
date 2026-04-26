@@ -117,6 +117,7 @@ h4 {
     color: var(--color-primary);
     background: #eef2f6;
     border: 1px solid var(--color-border);
+    overflow: hidden;
   }
 
   .nav-links {
