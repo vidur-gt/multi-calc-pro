@@ -9,6 +9,9 @@ export const metadata: Metadata = {
   title: 'S-Money | Save Smarter, Not Harder',
   description: 'Free EMI, SIP, FD, and Income Tax calculators with smart tax-saving suggestions. Save smarter, not harder.',
   keywords: 'EMI calculator, SIP calculator, Income Tax calculator India, FD calculator, Financial tools',
+  verification: {
+    google: 'F-Ljz6HfOHI075B6Ps-gsY2C4PRmkv0hKVg1h311E3w',
+  },
 }
 
 export default function RootLayout({
