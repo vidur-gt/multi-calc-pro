@@ -122,11 +122,11 @@ export function getTaxSuggestions(income: number, deductions: number, isOldRegim
   }
   
   if (deductions < 150000) {
-    suggestions.push(`Consider investing up to ₹${150000 - deductions} more in 80C (PPF, ELSS, LIC) to maximize tax savings if you opt for the Old Regime.`);
+    suggestions.push(`Consider investing up to Rs. ${150000 - deductions} more in 80C (PPF, ELSS, LIC) to maximize tax savings if you opt for the Old Regime.`);
   }
 
   if (income > 1000000) {
-    suggestions.push("Investing in NPS (Section 80CCD) can provide an additional ₹50,000 deduction in the Old Regime.");
+    suggestions.push("Investing in NPS (Section 80CCD) can provide an additional Rs. 50,000 deduction in the Old Regime.");
   }
 
   return suggestions;

@@ -29,17 +29,17 @@ export default function CalculatorLayout({ title, description, children, id }: P
   };
 
   return (
-    <div className="max-w-4xl mx-auto">
-      <div className="mb-8">
-        <h1 className="text-3xl mb-2">{title}</h1>
-        <p className="text-slate-500">{description}</p>
+    <div className="mx-auto max-w-5xl">
+      <div className="mb-6 sm:mb-8">
+        <h1 className="mb-2 text-3xl font-extrabold text-slate-950 sm:text-4xl">{title}</h1>
+        <p className="max-w-3xl leading-7 text-slate-600">{description}</p>
       </div>
 
-      <div id={id} className="calc-card grid md:grid-cols-2 gap-8 bg-white">
+      <div id={id} className="calc-card grid gap-6 bg-white md:grid-cols-2 lg:gap-8">
         {children}
       </div>
 
-      <div className="mt-8 flex gap-4">
+      <div className="mt-6 flex flex-col gap-3 sm:flex-row">
         <button onClick={downloadPDF} className="btn-primary">
           <Download className="w-4 h-4" />
           Download PDF Report
@@ -49,8 +49,7 @@ export default function CalculatorLayout({ title, description, children, id }: P
             navigator.clipboard.writeText(window.location.href);
             alert("Link copied to clipboard!");
           }} 
-          className="btn-primary" 
-          style={{ background: 'var(--secondary)', color: 'var(--secondary-foreground)' }}
+          className="btn-secondary" 
         >
           <Share2 className="w-4 h-4" />
           Share Tool
@@ -58,14 +57,14 @@ export default function CalculatorLayout({ title, description, children, id }: P
       </div>
 
       {/* SEO Content Section */}
-      <div className="mt-12 prose prose-slate max-w-none">
+      <div className="mt-12 max-w-none rounded-[10px] border border-slate-200 bg-white p-5 text-slate-600 shadow-sm sm:p-6">
         <hr className="my-8 border-slate-200" />
-        <h2 className="text-2xl mb-4">How to Use the {title}</h2>
+        <h2 className="mb-4 text-2xl font-bold text-slate-900">How to Use the {title}</h2>
         <p className="mb-4">
           This professional {title} is designed to provide accurate results based on official formulas. 
           Simply input your details in the left panel, and the results will update in real-time.
         </p>
-        <h3 className="text-xl mb-2">Why S-Money?</h3>
+        <h3 className="mb-2 text-xl font-bold text-slate-900">Why S-Money?</h3>
         <p>
           S-Money provides precision-engineered financial tools with a focus on ease of use and data privacy. 
           Our calculators are updated with the latest FY 2024-25 tax slabs and financial standards.

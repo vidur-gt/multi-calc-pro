@@ -1,113 +1,45 @@
-"use client";
+import EMICalculator from "@/components/calculators/EMICalculator";
+import Link from "next/link";
+import { ChevronRight, Home } from "lucide-react";
 
-import { useState, useMemo } from "react";
-import CalculatorLayout from "@/components/CalculatorLayout";
-import { calculateEMI, formatCurrency } from "@/lib/calculators";
-import AdUnit from "@/components/AdUnit";
-import { Info } from "lucide-react";
+export const metadata = {
+  title: "EMI Calculator - Calculate Home & Car Loan EMI",
+  description: "Calculate your monthly home or car loan installments instantly. Get an accurate EMI estimate with interest and principal breakdown.",
+};
 
-export default function EMICalculator() {
-  const [p, setP] = useState(500000);
-  const [r, setR] = useState(9);
-  const [n, setN] = useState(60);
-
-  const emi = useMemo(() => calculateEMI(p, r, n), [p, r, n]);
-  const totalPayment = emi * n;
-  const totalInterest = totalPayment - p;
-
+export default function EMICalculatorPage() {
   return (
-    <CalculatorLayout 
-      title="EMI Calculator" 
-      description="Calculate your monthly home or car loan installments instantly."
-      id="emi-calc"
-    >
-      <div>
-        <div className="input-group">
-          <label className="input-label">Loan Amount (₹)</label>
-          <input 
-            type="number" 
-            className="input-field" 
-            value={p} 
-            onChange={e => setP(Number(e.target.value))} 
-          />
-          <input 
-            type="range" 
-            min="10000" 
-            max="10000000" 
-            step="10000" 
-            className="w-full mt-2 accent-slate-800" 
-            value={p} 
-            onChange={e => setP(Number(e.target.value))} 
-          />
-        </div>
+    <div className="mx-auto flex w-full max-w-6xl flex-col gap-10">
+      <nav className="flex items-center gap-2 text-sm text-slate-500">
+        <Link href="/" className="hover:text-slate-900"><Home className="w-4 h-4" /></Link>
+        <ChevronRight className="w-3 h-3" />
+        <span className="text-slate-900 font-medium">EMI Calculator</span>
+      </nav>
 
-        <div className="input-group">
-          <label className="input-label">Interest Rate (% p.a)</label>
-          <input 
-            type="number" 
-            className="input-field" 
-            value={r} 
-            onChange={e => setR(Number(e.target.value))} 
-          />
-          <input 
-            type="range" 
-            min="1" 
-            max="25" 
-            step="0.1" 
-            className="w-full mt-2 accent-slate-800" 
-            value={r} 
-            onChange={e => setR(Number(e.target.value))} 
-          />
-        </div>
+      <section>
+        <h1 className="mb-4 text-3xl font-extrabold text-slate-950 sm:text-4xl">EMI Calculator</h1>
+        <p className="max-w-3xl text-base leading-8 text-slate-600 sm:text-lg">
+          Calculate your Equated Monthly Installment (EMI) for home loans, car loans, and personal loans. Use our calculator to understand your monthly commitment and total interest outflow before borrowing.
+        </p>
+      </section>
 
-        <div className="input-group">
-          <label className="input-label">Tenure (Months)</label>
-          <input 
-            type="number" 
-            className="input-field" 
-            value={n} 
-            onChange={e => setN(Number(e.target.value))} 
-          />
-          <input 
-            type="range" 
-            min="1" 
-            max="360" 
-            step="1" 
-            className="w-full mt-2 accent-slate-800" 
-            value={n} 
-            onChange={e => setN(Number(e.target.value))} 
-          />
-        </div>
+      <EMICalculator />
 
-        <AdUnit slot="1234567890" />
-      </div>
-
-      <div className="bg-slate-50 p-8 rounded-xl flex flex-col justify-center">
-        <div className="text-center mb-8">
-          <p className="text-sm text-slate-500 uppercase tracking-widest mb-1">Monthly EMI</p>
-          <h2 className="text-5xl font-bold">{formatCurrency(emi)}</h2>
+      <section className="section-panel p-5 sm:p-6">
+        <h2 className="mb-5 text-2xl font-bold">Popular EMI Calculators</h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          {["home-loan-emi-calculator-india", "car-loan-emi-calculator-india", "bike-loan-emi-calculator-india", "personal-loan-emi-calculator-india", "emi-calculator-for-10-lakh"].map(slug => (
+            <Link 
+              key={slug} 
+              href={`/emi-calculator/${slug}`}
+              className="flex items-center justify-between rounded-lg border border-slate-200 bg-white p-4 text-sm font-semibold capitalize text-slate-700 transition-all hover:border-slate-400 hover:shadow-sm"
+            >
+              {slug.replace(/-/g, ' ')}
+              <ChevronRight className="w-4 h-4 text-slate-400" />
+            </Link>
+          ))}
         </div>
-
-        <div className="space-y-4">
-          <div className="result-item">
-            <span className="result-label">Principal Amount</span>
-            <span className="result-value">{formatCurrency(p)}</span>
-          </div>
-          <div className="result-item">
-            <span className="result-label">Total Interest Payable</span>
-            <span className="result-value">{formatCurrency(totalInterest)}</span>
-          </div>
-          <div className="result-item">
-            <span className="result-label">Total Payment</span>
-            <span className="result-value">{formatCurrency(totalPayment)}</span>
-          </div>
-        </div>
-
-        <div className="mt-8 p-4 bg-white border border-slate-200 rounded-lg flex gap-3 text-xs text-slate-500">
-          <Info className="w-4 h-4 text-slate-400 shrink-0" />
-          <p>This is an estimate. Actual EMI may vary based on processing fees and bank conditions.</p>
-        </div>
-      </div>
-    </CalculatorLayout>
+      </section>
+    </div>
   );
 }

@@ -1,113 +1,45 @@
-"use client";
+import SIPCalculator from "@/components/calculators/SIPCalculator";
+import Link from "next/link";
+import { ChevronRight, Home } from "lucide-react";
 
-import { useState, useMemo } from "react";
-import CalculatorLayout from "@/components/CalculatorLayout";
-import { calculateSIP, formatCurrency } from "@/lib/calculators";
-import AdUnit from "@/components/AdUnit";
-import { TrendingUp } from "lucide-react";
+export const metadata = {
+  title: "SIP Calculator - Mutual Fund Investment Planning",
+  description: "Calculate your estimated SIP returns for mutual funds in India. Plan your investments and track wealth creation accurately.",
+};
 
-export default function SIPCalculator() {
-  const [m, setM] = useState(5000);
-  const [r, setR] = useState(12);
-  const [y, setY] = useState(10);
-
-  const futureValue = useMemo(() => calculateSIP(m, r, y), [m, r, y]);
-  const investedAmount = m * 12 * y;
-  const estimatedReturns = futureValue - investedAmount;
-
+export default function SIPCalculatorPage() {
   return (
-    <CalculatorLayout 
-      title="SIP Calculator" 
-      description="Calculate how much wealth you can build with Systematic Investment Plans."
-      id="sip-calc"
-    >
-      <div>
-        <div className="input-group">
-          <label className="input-label">Monthly Investment (₹)</label>
-          <input 
-            type="number" 
-            className="input-field" 
-            value={m} 
-            onChange={e => setM(Number(e.target.value))} 
-          />
-          <input 
-            type="range" 
-            min="500" 
-            max="1000000" 
-            step="500" 
-            className="w-full mt-2 accent-slate-800" 
-            value={m} 
-            onChange={e => setM(Number(e.target.value))} 
-          />
-        </div>
+    <div className="mx-auto flex w-full max-w-6xl flex-col gap-10">
+      <nav className="flex items-center gap-2 text-sm text-slate-500">
+        <Link href="/" className="hover:text-slate-900"><Home className="w-4 h-4" /></Link>
+        <ChevronRight className="w-3 h-3" />
+        <span className="text-slate-900 font-medium">SIP Calculator</span>
+      </nav>
 
-        <div className="input-group">
-          <label className="input-label">Expected Return Rate (% p.a)</label>
-          <input 
-            type="number" 
-            className="input-field" 
-            value={r} 
-            onChange={e => setR(Number(e.target.value))} 
-          />
-          <input 
-            type="range" 
-            min="1" 
-            max="30" 
-            step="0.5" 
-            className="w-full mt-2 accent-slate-800" 
-            value={r} 
-            onChange={e => setR(Number(e.target.value))} 
-          />
-        </div>
+      <section>
+        <h1 className="mb-4 text-3xl font-extrabold text-slate-950 sm:text-4xl">SIP Calculator</h1>
+        <p className="max-w-3xl text-base leading-8 text-slate-600 sm:text-lg">
+          Systematic Investment Plan (SIP) is a disciplined way of investing in mutual funds. Use our SIP calculator to estimate the future value of your monthly investments based on expected market returns.
+        </p>
+      </section>
 
-        <div className="input-group">
-          <label className="input-label">Time Period (Years)</label>
-          <input 
-            type="number" 
-            className="input-field" 
-            value={y} 
-            onChange={e => setY(Number(e.target.value))} 
-          />
-          <input 
-            type="range" 
-            min="1" 
-            max="40" 
-            step="1" 
-            className="w-full mt-2 accent-slate-800" 
-            value={y} 
-            onChange={e => setY(Number(e.target.value))} 
-          />
-        </div>
+      <SIPCalculator />
 
-        <AdUnit slot="0987654321" />
-      </div>
-
-      <div className="bg-slate-50 p-8 rounded-xl flex flex-col justify-center">
-        <div className="text-center mb-8">
-          <p className="text-sm text-slate-500 uppercase tracking-widest mb-1">Estimated Returns</p>
-          <h2 className="text-5xl font-bold" style={{ color: '#10b981' }}>{formatCurrency(futureValue)}</h2>
+      <section className="section-panel p-5 sm:p-6">
+        <h2 className="mb-5 text-2xl font-bold">Explore Top SIP Strategies</h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          {["sip-calculator-1000-per-month", "sip-calculator-5000-per-month", "sip-calculator-10000-per-month", "sip-calculator-10-years", "sip-calculator-india-returns"].map(slug => (
+            <Link 
+              key={slug} 
+              href={`/sip-calculator/${slug}`}
+              className="flex items-center justify-between rounded-lg border border-slate-200 bg-white p-4 text-sm font-semibold capitalize text-slate-700 transition-all hover:border-slate-400 hover:shadow-sm"
+            >
+              {slug.replace(/-/g, ' ')}
+              <ChevronRight className="w-4 h-4 text-slate-400" />
+            </Link>
+          ))}
         </div>
-
-        <div className="space-y-4">
-          <div className="result-item">
-            <span className="result-label">Invested Amount</span>
-            <span className="result-value">{formatCurrency(investedAmount)}</span>
-          </div>
-          <div className="result-item">
-            <span className="result-label">Est. Returns</span>
-            <span className="result-value">{formatCurrency(estimatedReturns)}</span>
-          </div>
-          <div className="result-item">
-            <span className="result-label">Total Value</span>
-            <span className="result-value">{formatCurrency(futureValue)}</span>
-          </div>
-        </div>
-
-        <div className="mt-8 p-4 bg-white border border-slate-200 rounded-lg flex gap-3 text-xs text-slate-500">
-          <TrendingUp className="w-4 h-4 text-emerald-500 shrink-0" />
-          <p>Compounding works best over long periods. Even a small increase in monthly SIP can lead to significant wealth gain.</p>
-        </div>
-      </div>
-    </CalculatorLayout>
+      </section>
+    </div>
   );
 }
